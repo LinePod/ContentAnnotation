@@ -111,6 +111,5 @@ function handleMouseDown(event) {
 (function() {
 
 	aSvg.onmousedown = handleMouseDown;
-	//document.onMouseUp = handleMouseUp;
 })();
 
