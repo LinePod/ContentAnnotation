@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type='text/css'>
+#annotateText {
+	display: none;
+}
+
+body{
+	background: #000000;
+}
+</style>
+<meta charset="utf-8">
+<title>Example</title>
+<style>
+body {
+	height: 3000px;
+}
+.dot {
+	width: 2px;
+	height: 2px;
+	background-color: black;
+	position: absolute;
+}
+</style>
+</head>
+<body>
+<form action="#" onsubmit="handleAnnotated()">
+<input type="text" id="annotateText" value=""></input>
+</form>
+<form>
+	<input type="text" id="imagename" value="" />
+	<input type="button" id="btn" value="Image URL" />
+</form>
+<script type="text/javascript" src="imageLoader.js"></script>
+<script type="text/javascript" src="mouse.js"></script>
+</body>
+</html>
