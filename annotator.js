@@ -1,4 +1,5 @@
 var polys = [];
+var annotations = []
 var curPoly = [];
 var pointArrays = [];
 var firstPoint = true;
@@ -8,7 +9,7 @@ var offset = 100
 var aSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 aSvg.style.position = "absolute"
 aSvg.style.top = offset + "px"
-aSvg.style.left = "0px"
+aSvg.style.left = "0px" 
 aSvg.style.width = "100%"
 aSvg.style.height = "90%"
 aSvg.setAttribute('width', 1000);
@@ -40,6 +41,11 @@ function getMouseXY(event) {
 	return([event.pageX, event.pageY-offset]);
 }
 
+function Annotation() {
+	this.coords = []
+	this.text = ""
+}
+
 function drawLastLine(poly) {
 	if(poly.length >= 2) {
 		var aLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -65,14 +71,20 @@ function isCloseToStart(poly, pos) {
 function handleAnnotated() {
 	var textBox = document.getElementById("annotateText")
 	textBox.style.display = "none"
-	console.log(textBox.value)
-	console.log(polys[polys.length - 1])
+
+	var annotation = new Annotation()
+	annotation.coords = polys[polys.length - 1]
+	annotation.text = textBox.value
+	annotations.push(annotation)
+
 	textBox.value = ""
 
+	console.log(JSON.stringify(annotations))
 }
 
 function completePoly(pos) {
-	curPoly.push(curPoly[0])
+
+	curPoly.push(curPoly[0]) //push starting point at end of polygon
 	polys.push(curPoly)
 	drawLastLine(curPoly)
 
@@ -107,9 +119,6 @@ function handleMouseDown(event) {
 	}
 }
 
-
 (function() {
-
 	aSvg.onmousedown = handleMouseDown;
 })();
-
